@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-const uri = process.env.MLAB_URI;
+const uri = process.env.MONGO_LOCAL_URI;
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useCreateIndex: true,

@@ -3,16 +3,19 @@ let User = require('../models/user.model');
 
 router.route('/').get((req, res) => {
   User.find()
-    .then(users => res.json(users))
+    .then(users => {
+      res.json(users);
+      console.log(users);
+    })
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req, res) => {
-  const username = req.body.username;
+  const { username } = req.body;
   const newUser = new User({ username });
   newUser
     .save()
-    .then(() => res.json('User added!'))
+    .then(() => res.json({ message: 'User added!', username }))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 

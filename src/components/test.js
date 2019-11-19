@@ -4,8 +4,8 @@ import axios from 'axios';
 function Test() {
   const [username, setUsername] = useState('');
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(event) {
+    event.preventDefault();
     const user = {
       username
     };

@@ -1,59 +1,47 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-export class CreateUser extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: ''
-    };
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+function CreateUser() {
+  const [username, setUsername] = useState('');
 
-    this.onSubmit = this.onSubmit.bind(this);
-  }
+  const onChangeUsername = event => setUsername(event.target.value);
 
-  onSubmit(e) {
-    e.preventDefault();
-    const user = {
-      username: this.state.username
-    };
+  const onSubmit = event => {
+    event.preventDefault();
+    const user = { username };
     console.log(user);
     axios
-      .post('http://localhost:5000/users/add', user) //we wrote the backend to expect json so user is an object tat we defined just above here
-      .then(res => console.log(res.data));
-    this.setState({ username: '' });
-  }
-
-  onChangeUsername(e) {
-    this.setState({ username: e.target.value });
-  }
-
-  render() {
-    return (
-      <div>
-        <h3>Create New User</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className='form-group'>
-            <label>Username: </label>
-            <input
-              type='text'
-              required
-              className='form-control'
-              value={this.state.username}
-              onChange={this.onChangeUsername}
-            />
-          </div>
-          <div className='form-group'>
-            <input
-              type='submit'
-              value='Create User'
-              className='btn btn-primary'
-            />
-          </div>
-        </form>
-      </div>
+      .post('http://localhost:5000/users/add', user)
+      .then(res => console.log(res));
+    alert(
+      `User ${username} created.  Create another user or go add an exercise!`
     );
-  }
+    setUsername('');
+  };
+  return (
+    <div>
+      <h3>Create New User</h3>
+      <form onSubmit={onSubmit}>
+        <div className='form-group'>
+          <label>Username: </label>
+          <input
+            type='text'
+            required
+            className='form-control'
+            value={username}
+            onChange={onChangeUsername}
+          />
+        </div>
+        <div className='form-group'>
+          <input
+            type='submit'
+            value='Create User'
+            className='btn btn-primary'
+          />
+        </div>
+      </form>
+    </div>
+  );
 }
 
 export default CreateUser;
