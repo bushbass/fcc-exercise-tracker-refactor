@@ -4,8 +4,15 @@ changed navbar-expand-lg to -sm because it was disappearing when I was using dev
 added show all users page
 11-19
 added user update route
+destructred props in single-exercise-component
+componentized nav bar - is this too much abstraction?
+refactored create-exercise for hooks
+started refacoring edit exercise but need to figure out router
 
-todo
+## todo
+
+figure out useParams from router/hooks
+
 create user update form
 create link to update user from all users list
 
