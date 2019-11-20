@@ -1,22 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Exercise = props => (
+const Exercise = ({ exercise, deleteExercise }) => (
   <tr>
-    <td>{props.exercise.username}</td>
-    <td>{props.exercise.description}</td>
-    <td>{props.exercise.duration}</td>
-    <td>{props.exercise.date.substring(0, 10)}</td>
+    <td>{exercise.username}</td>
+    <td>{exercise.description}</td>
+    <td>{exercise.duration}</td>
+    <td>{exercise.date.substring(0, 10)}</td>
     <td>
-      <Link to={'/edit/' + props.exercise._id}>
+      <Link to={'/edit/' + exercise._id}>
         <button>Edit</button>
       </Link>{' '}
-      or{' '}
+      |{' '}
       <button
         onClick={() => {
-          props.deleteExercise(props.exercise._id);
+          deleteExercise(exercise._id);
         }}
       >
+        {' '}
         Delete
       </button>
     </td>
