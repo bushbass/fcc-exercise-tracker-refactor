@@ -1,12 +1,16 @@
 const router = require('express').Router();
 let Exercise = require('../models/exercise.model');
 
+// GET - list all exercises
+// ROUTE - /exercises
 router.route('/').get((req, res) => {
   Exercise.find()
     .then(exercises => res.json(exercises))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// POST - add new exercise
+// ROUTE - /exercises/add
 router.route('/add').post((req, res) => {
   const { username, description, duration, date } = req.body;
   const newExercise = new Exercise({
@@ -22,18 +26,24 @@ router.route('/add').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// GET - show one exercise by ID
+// ROUTE - /exercises/:id
 router.route('/:id').get((req, res) => {
   Exercise.findById(req.params.id)
     .then(exercise => res.json(exercise))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// DELETE - delete one exercise by id
+// ROUTE - /exercises/:id
 router.route('/:id').delete((req, res) => {
   Exercise.findByIdAndDelete(req.params.id)
-    .then(res => console.log(` Exercise ${res.description} deleted`))
+    .then(response => res.json(` Exercise ${response.description} deleted`))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// POST - update one exercise
+// ROUTE - /exercises/update/:id
 router.route('/update/:id').post((req, res) => {
   // const { username, description, duration, date } = req.body;
   Exercise.findById(req.params.id)

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Exercise from './single-exercise.component';
+import SingleExercise from './single-exercise.component';
 
 function ExercisesList() {
   const [exercises, setExercises] = useState([]);
@@ -40,7 +40,7 @@ function ExercisesList() {
         <tbody>
           {exercises.map(currentexercise => {
             return (
-              <Exercise
+              <SingleExercise
                 exercise={currentexercise}
                 deleteExercise={deleteExercise}
                 key={currentexercise._id}
