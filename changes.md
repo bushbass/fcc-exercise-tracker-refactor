@@ -9,6 +9,7 @@ componentized nav bar - is this too much abstraction?
 refactored create-exercise for hooks
 started refacoring edit exercise but need to figure out router
 updated delete exercises route, was not returning in postman
+updated all user crud routes
 
 ## todo
 

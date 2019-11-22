@@ -3,20 +3,20 @@ import { Link } from 'react-router-dom';
 
 const navLinks = [
   {
-    route: '/',
-    linkName: 'Exercise Tracker'
+    route: '/exercises',
+    linkName: 'All Exercises'
   },
   {
-    route: '/create',
-    linkName: 'Create Exercise Log'
-  },
-  {
-    route: '/user',
-    linkName: 'Create User'
+    route: '/exercises/add',
+    linkName: 'Create Exercise'
   },
   {
     route: '/users',
     linkName: 'All Users'
+  },
+  {
+    route: '/users/add',
+    linkName: 'Create User'
   }
 ];
 

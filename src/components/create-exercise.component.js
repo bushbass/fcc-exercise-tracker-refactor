@@ -31,7 +31,7 @@ const CreateExercise = () => {
       .post('http://localhost:5000/exercises/add', exercise)
       .then(res => console.log(res.data));
 
-    window.location = '/';
+    window.location = '/exercises';
   };
 
   const [username, setUsername] = useState('');
@@ -42,7 +42,6 @@ const CreateExercise = () => {
 
   useEffect(() => {
     axios.get('http://localhost:5000/users').then(response => {
-      console.log(response);
       if (response.data.length > 0) {
         setUsers(response.data.map(user => user.username));
         setUsername(response.data[0].username);
@@ -52,7 +51,7 @@ const CreateExercise = () => {
 
   return (
     <div>
-      <h3>Create New Exercise Log</h3>
+      <h3>Create New Exercise</h3>
       <form onSubmit={onSubmit}>
         <div className='form-group'>
           <label>Username: </label>
