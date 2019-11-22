@@ -8,7 +8,7 @@ const SingleExercise = ({ exercise, deleteExercise }) => (
     <td>{exercise.duration}</td>
     <td>{exercise.date.substring(0, 10)}</td>
     <td>
-      <Link to={'/edit/' + exercise._id}>
+      <Link to={'/exercises/edit/' + exercise._id}>
         <button>Edit</button>
       </Link>{' '}
       |{' '}

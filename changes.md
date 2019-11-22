@@ -10,6 +10,7 @@ refactored create-exercise for hooks
 started refacoring edit exercise but need to figure out router
 updated delete exercises route, was not returning in postman
 updated all user crud routes
+updated nav and home page to reflect same routes as api, and created home page
 
 ## todo
 

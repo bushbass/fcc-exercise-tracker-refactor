@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
+import { useParams } from 'react-router-dom';
+
 import 'react-datepicker/dist/react-datepicker.css';
 
 function EditExercise(props) {
@@ -8,7 +10,7 @@ function EditExercise(props) {
   const [description, setDescription] = useState('');
   const [duration, setDuration] = useState(0);
   const [date, setDate] = useState(new Date());
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(['Bob']);
 
   const onChangeUsername = e => {
     setUsername(e.target.value);
@@ -24,6 +26,7 @@ function EditExercise(props) {
       date
     });
   };
+  const userID = useParams();
   const onSubmit = e => {
     e.preventDefault();
     const exercise = {
@@ -32,28 +35,14 @@ function EditExercise(props) {
       duration: duration,
       date: date
     };
-    console.log(exercise);
 
     axios
-      .post(
-        'http://localhost:5000/exercises/update/' + props.match.params.id,
-        exercise
-      )
+      .post('http://localhost:5000/exercises/update/' + userID.id, exercise)
       .then(res => console.log(res.data));
 
-    window.location = '/';
+    window.location = '/exercises';
   };
-  useEffect(props => {
-    axios
-      .get('http://localhost:5000/exercises/' + props.match.params.id)
-      .then(response => {
-        console.log(response);
-        setUsername(response.data.username);
-        setDescription(response.data.description);
-        setDuration(response.data.duration);
-        setDate(new Date(response.data.date));
-      });
-
+  useEffect(() => {
     axios.get('http://localhost:5000/users/').then(response => {
       if (response.data.length > 0) {
         setUsers({
@@ -61,10 +50,17 @@ function EditExercise(props) {
         });
       }
     });
+    axios.get('http://localhost:5000/exercises/' + userID.id).then(response => {
+      setUsername(response.data.username);
+      setDescription(response.data.description);
+      setDuration(response.data.duration);
+      setDate(new Date(response.data.date));
+    });
   }, []);
+
   return (
     <div>
-      <h3>Edit Exercise Log</h3>
+      <h3>Edit Exercise</h3>
       <form onSubmit={onSubmit}>
         <div className='form-group'>
           <label>Username: </label>
@@ -74,6 +70,8 @@ function EditExercise(props) {
             value={username}
             onChange={onChangeUsername}
           >
+            {console.log('inselect', users)}
+
             {users.map(function(user) {
               return (
                 <option key={user} value={user}>
@@ -83,6 +81,7 @@ function EditExercise(props) {
             })}
           </select>
         </div>
+
         <div className='form-group'>
           <label>Description: </label>
           <input
@@ -112,7 +111,7 @@ function EditExercise(props) {
         <div className='form-group'>
           <input
             type='submit'
-            value='Edit Exercise Log'
+            value='Edit Exercise'
             className='btn btn-primary'
           />
         </div>
