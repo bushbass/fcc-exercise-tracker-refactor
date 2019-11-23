@@ -45,9 +45,7 @@ function EditExercise(props) {
   useEffect(() => {
     axios.get('http://localhost:5000/users/').then(response => {
       if (response.data.length > 0) {
-        setUsers({
-          users: response.data.map(user => user.username)
-        });
+        setUsers(response.data.map(user => user.username));
       }
     });
     axios.get('http://localhost:5000/exercises/' + userID.id).then(response => {
@@ -56,7 +54,7 @@ function EditExercise(props) {
       setDuration(response.data.duration);
       setDate(new Date(response.data.date));
     });
-  }, []);
+  });
 
   return (
     <div>
@@ -70,8 +68,6 @@ function EditExercise(props) {
             value={username}
             onChange={onChangeUsername}
           >
-            {console.log('inselect', users)}
-
             {users.map(function(user) {
               return (
                 <option key={user} value={user}>
