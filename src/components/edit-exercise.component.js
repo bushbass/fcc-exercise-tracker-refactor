@@ -22,9 +22,9 @@ function EditExercise(props) {
     setDuration(e.target.value);
   };
   const onChangeDate = date => {
-    setDate({
-      date
-    });
+    setDate(new Date(date));
+
+    console.log(date);
   };
   const userID = useParams();
   const onSubmit = e => {
@@ -54,7 +54,7 @@ function EditExercise(props) {
       setDuration(response.data.duration);
       setDate(new Date(response.data.date));
     });
-  });
+  }, [userID.id]);
 
   return (
     <div>
