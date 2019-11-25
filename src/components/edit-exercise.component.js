@@ -30,10 +30,10 @@ function EditExercise(props) {
   const onSubmit = e => {
     e.preventDefault();
     const exercise = {
-      username: username,
-      description: description,
-      duration: duration,
-      date: date
+      username,
+      description,
+      duration,
+      date
     };
 
     axios
