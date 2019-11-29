@@ -7,7 +7,7 @@ router.route('/').get((req, res) => {
   User.find()
     .then(users => {
       res.json(users);
-      // console.log(users);
+      console.log('local users');
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });
