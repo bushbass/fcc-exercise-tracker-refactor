@@ -6,9 +6,10 @@ function UsersList() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/users/')
+      .get('http://fcc-exercise-tracker-backend.herokuapp.com/users')
       .then(response => {
         setUsers(response.data);
+        alert(response.data)
       })
       .catch(error => {
         console.log(error);
