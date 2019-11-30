@@ -17,7 +17,7 @@ function EditExercise(props) {
 
     axios
       .post(
-        'http://localhost:5000/useres/update/' + props.match.params.id,
+        'https://fcc-exercise-tracker-backend.herokuapp.com/users/update/' + props.match.params.id,
         user
       )
       .then(res => console.log(res.data));
@@ -26,7 +26,7 @@ function EditExercise(props) {
   };
   useEffect(props => {
     axios
-      .get('http://localhost:5000/users/' + props.match.params.id)
+      .get('https://fcc-exercise-tracker-backend.herokuapp.com/users' + props.match.params.id)
       .then(response => {
         console.log(response);
         setUsername(response.data.username);

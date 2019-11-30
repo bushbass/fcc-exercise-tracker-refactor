@@ -7,7 +7,7 @@ function ExercisesList() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/exercises/')
+      .get('https://fcc-exercise-tracker-backend.herokuapp.com/exercises/')
       .then(response => {
         setExercises(response.data);
       })
@@ -17,7 +17,7 @@ function ExercisesList() {
   }, []);
 
   const deleteExercise = id => {
-    axios.delete('http://localhost:5000/exercises/' + id).then(response => {
+    axios.delete('https://fcc-exercise-tracker-backend.herokuapp.com/exercises/' + id).then(response => {
       console.log(response.data);
     });
 
