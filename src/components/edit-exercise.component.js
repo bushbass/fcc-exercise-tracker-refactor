@@ -12,21 +12,13 @@ function EditExercise(props) {
   const [date, setDate] = useState(new Date());
   const [users, setUsers] = useState(['Bob']);
 
-  const onChangeUsername = e => {
-    setUsername(e.target.value);
-  };
-  const onChangeDescription = e => {
-    setDescription(e.target.value);
-  };
-  const onChangeDuration = e => {
-    setDuration(e.target.value);
-  };
-  const onChangeDate = date => {
-    setDate(new Date(date));
-
-    console.log(date);
-  };
+  const onChangeUsername = e => { setUsername(e.target.value) };
+  const onChangeDescription = e => { setDescription(e.target.value) };
+  const onChangeDuration = e => { setDuration(e.target.value) };
+  const onChangeDate = date => { setDate(new Date(date)) };
+  
   const userID = useParams();
+  
   const onSubmit = e => {
     e.preventDefault();
     const exercise = {
@@ -38,10 +30,10 @@ function EditExercise(props) {
 
     axios
       .post('https://fcc-exercise-tracker-backend.herokuapp.com/exercises/update/' + userID.id, exercise)
-      .then(res => console.log(res.data));
-
-    window.location = '/exercises';
+      .then(res => console.log(res.data))
+      .then(() => window.location = '/exercises');
   };
+  
   useEffect(() => {
     axios.get('https://fcc-exercise-tracker-backend.herokuapp.com/users').then(response => {
       if (response.data.length > 0) {
