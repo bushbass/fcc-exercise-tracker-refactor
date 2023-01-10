@@ -7,28 +7,30 @@ function ExercisesList() {
 
   useEffect(() => {
     axios
-      .get('https://fcc-exercise-tracker-backend.herokuapp.com/exercises/')
-      .then(response => {
+      .get('https://fcc-exercise-backend.onrender.com/exercises/')
+      .then((response) => {
         setExercises(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  const deleteExercise = id => {
-    axios.delete('https://fcc-exercise-tracker-backend.herokuapp.com/exercises/' + id).then(response => {
-      console.log(response.data);
-    });
+  const deleteExercise = (id) => {
+    axios
+      .delete('https://fcc-exercise-backend.onrender.com/exercises/' + id)
+      .then((response) => {
+        console.log(response.data);
+      });
 
-    setExercises(exercises.filter(el => el._id !== id));
+    setExercises(exercises.filter((el) => el._id !== id));
   };
 
   return (
     <div>
       <h3>Logged Exercises</h3>
-      <table className='table'>
-        <thead className='thead-light'>
+      <table className="table">
+        <thead className="thead-light">
           <tr>
             <th>Username</th>
             <th>Description</th>
@@ -38,7 +40,7 @@ function ExercisesList() {
           </tr>
         </thead>
         <tbody>
-          {exercises.map(currentexercise => {
+          {exercises.map((currentexercise) => {
             return (
               <SingleExercise
                 exercise={currentexercise}

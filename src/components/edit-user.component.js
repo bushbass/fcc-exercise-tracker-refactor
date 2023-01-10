@@ -3,60 +3,59 @@ import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useParams } from 'react-router-dom';
 
-
 function EditExercise(props) {
   const [username, setUsername] = useState('');
 
-  const onChangeUsername = e => {
+  const onChangeUsername = (e) => {
     setUsername(e.target.value);
   };
-  
+
   const userID = useParams();
-  
-  const onSubmit = e => {
+
+  const onSubmit = (e) => {
     e.preventDefault();
     const user = {
-      username
+      username,
     };
     console.log(user);
 
     axios
       .post(
-        'https://fcc-exercise-tracker-backend.herokuapp.com/users/update/' + userID.id,
+        'https://fcc-exercise-backend.onrender.com/users/update/' + userID.id,
         user
       )
-      .then(res => console.log(res.data))
-      .then(() => window.location = '/users')
-      
-
-    
+      .then((res) => console.log(res.data))
+      .then(() => (window.location = '/users'));
   };
-  useEffect(props => {
-    axios
-      .get('https://fcc-exercise-tracker-backend.herokuapp.com/users/' + userID.id)
-      .then(response => {
-        console.log(response);
-        setUsername(response.data.username);
-      });
-  }, [userID.id]);
+  useEffect(
+    (props) => {
+      axios
+        .get('https://fcc-exercise-backend.onrender.com/users/' + userID.id)
+        .then((response) => {
+          console.log(response);
+          setUsername(response.data.username);
+        });
+    },
+    [userID.id]
+  );
 
   return (
     <div>
       <h3>Edit User</h3>
       <form onSubmit={onSubmit}>
-        <div className='form-group'>
+        <div className="form-group">
           <label>Username: </label>
           <input
-            type='text'
+            type="text"
             required
-            className='form-control'
+            className="form-control"
             value={username}
             onChange={onChangeUsername}
           />
         </div>
 
-        <div className='form-group'>
-          <input type='submit' value='Edit User' className='btn btn-primary' />
+        <div className="form-group">
+          <input type="submit" value="Edit User" className="btn btn-primary" />
         </div>
       </form>
     </div>
