@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useParams } from 'react-router-dom';
+
 
 function EditExercise(props) {
   const [username, setUsername] = useState('');
@@ -8,30 +10,35 @@ function EditExercise(props) {
   const onChangeUsername = e => {
     setUsername(e.target.value);
   };
+  
+  const userID = useParams();
+  
   const onSubmit = e => {
     e.preventDefault();
     const user = {
-      username: username
+      username
     };
     console.log(user);
 
     axios
       .post(
-        'http://localhost:5000/useres/update/' + props.match.params.id,
+        'https://fcc-exercise-tracker-backend.herokuapp.com/users/update/' + userID.id,
         user
       )
-      .then(res => console.log(res.data));
+      .then(res => console.log(res.data))
+      .then(() => window.location = '/users')
+      
 
-    window.location = '/';
+    
   };
   useEffect(props => {
     axios
-      .get('http://localhost:5000/users/' + props.match.params.id)
+      .get('https://fcc-exercise-tracker-backend.herokuapp.com/users/' + userID.id)
       .then(response => {
         console.log(response);
         setUsername(response.data.username);
       });
-  }, []);
+  }, [userID.id]);
 
   return (
     <div>

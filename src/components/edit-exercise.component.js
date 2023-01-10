@@ -12,21 +12,13 @@ function EditExercise(props) {
   const [date, setDate] = useState(new Date());
   const [users, setUsers] = useState(['Bob']);
 
-  const onChangeUsername = e => {
-    setUsername(e.target.value);
-  };
-  const onChangeDescription = e => {
-    setDescription(e.target.value);
-  };
-  const onChangeDuration = e => {
-    setDuration(e.target.value);
-  };
-  const onChangeDate = date => {
-    setDate(new Date(date));
-
-    console.log(date);
-  };
+  const onChangeUsername = e => { setUsername(e.target.value) };
+  const onChangeDescription = e => { setDescription(e.target.value) };
+  const onChangeDuration = e => { setDuration(e.target.value) };
+  const onChangeDate = date => { setDate(new Date(date)) };
+  
   const userID = useParams();
+  
   const onSubmit = e => {
     e.preventDefault();
     const exercise = {
@@ -37,24 +29,28 @@ function EditExercise(props) {
     };
 
     axios
-      .post('http://localhost:5000/exercises/update/' + userID.id, exercise)
-      .then(res => console.log(res.data));
-
-    window.location = '/exercises';
+      .post('https://fcc-exercise-tracker-backend.herokuapp.com/exercises/update/' + userID.id, exercise)
+      .then(res => console.log(res.data))
+      .then(() => window.location = '/exercises');
   };
+  
   useEffect(() => {
-    axios.get('http://localhost:5000/users/').then(response => {
+    axios.get('https://fcc-exercise-tracker-backend.herokuapp.com/users').then(response => {
       if (response.data.length > 0) {
         setUsers(response.data.map(user => user.username));
       }
     });
-    axios.get('http://localhost:5000/exercises/' + userID.id).then(response => {
+    axios.get('https://fcc-exercise-tracker-backend.herokuapp.com/exercises/' + userID.id).then(response => {
       setUsername(response.data.username);
       setDescription(response.data.description);
       setDuration(response.data.duration);
       setDate(new Date(response.data.date));
     });
   }, [userID.id]);
+  
+  
+  
+  
 
   return (
     <div>

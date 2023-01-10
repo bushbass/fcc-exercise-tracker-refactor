@@ -11,7 +11,7 @@ function CreateUser() {
     const user = { username };
     console.log(user);
     axios
-      .post('http://localhost:5000/users/add', user)
+      .post('https://fcc-exercise-tracker-backend.herokuapp.com/users/add', user)
       .then(res => console.log(res));
     alert(
       `User ${username} created.  Create another user or go add an exercise!`
